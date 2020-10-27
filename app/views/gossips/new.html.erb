@@ -1,0 +1,57 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>The Gossip Project - Create</title>
+</head>
+
+<body>
+<h1> Bienvenue sur la page de création d'un potin</h1>
+
+
+   <% if flash[:notice_bad] %>
+<div class="alert alert-danger" role="alert">
+ Creation du Gossip annulée: titre trop long ou inexistant
+</div>
+  <% end %>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+<div id="container">
+<form>
+  <div class="row">
+    <div class="col">
+        <%= label_tag 'Titre' %> <br />
+        <%= text_field_tag 'title', @gossip.title, class: "form-control", placeholder: 'Un titre sympa', autocomplete: 'off' %>
+        <br /> <br />
+    </div>
+<div class="col">
+        <%= label_tag 'Contenu' %> <br />
+        <%= text_field_tag 'content', @gossip.content, class: "form-control", placeholder: 'Votre potin', autocomplete: 'off'%>
+    </div>
+  </div>
+
+        <br /> 
+
+
+        <%= submit_tag "Create Gossip", class: "btn btn-info" %>  <%= link_to "Revenir à l'accueil", root_path, :class => 'btn btn-secondary'%>
+</div>
+      <% end %>
+
+        </form>
+
+</div>
+</div>
+</div>
+<br>
+<br>
+
+</body>
+
+</html> 

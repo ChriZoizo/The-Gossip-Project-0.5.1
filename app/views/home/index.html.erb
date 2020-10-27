@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<!-- header -->
+<head>
+  <meta charset="utf-8">
+  <title><%= "The Gossip Project" %></title>
+  <script src="script.js"></script>
+</head>
+<!-- Body -->
+<body>
+<!-- Jumbotron -->
+<div class="jumbotron text-center">
+  <h1 class="display-4 text-dark">The Hacking Project</h1>
+  <p class="lead text-secondary">Découvrez notre base de donnée de potin a la con</p>
+  <a class="btn btn-dark btn-lg" href="#" role="button"> Se connecter </a>
+  <a class="btn btn-secondary btn-lg" href="#" role="button"> S'inscrire </a>
+</div>
+</div>
+<!-- Card -->
+<div class="container">
+<h1> Gossips </h1>
+<h4 style="color:grey;"> Un tas d'histoire pas interessantes</h4>
+<br> 
+<h3> Et voici la liste :</h3>
+<br> <br> <br> <br> 
+<div class="row">
+<!-- affichage des gossip -->
+<% @gossips.each do |goss|%>
+<div class="row">
+<!-- creation mini carte gossip -->
+<div class="card text-left m-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= goss.title%></h5>
+      <p class="card-text"><%= goss.user[:first_name]%></p>
+      <p class="card-text"><small class="text-muted"><%= goss.create_date.strftime("%d/%m/%Y")%></small></p>
+      <%= link_to "Accéder au gossip", gossip_path(goss.id), :class =>"btn btn-secondary btn-lg active" %>
+    </div>
+  </div>
+  </div>
+  <%end%>
+</body>
+</html>
+
+
+
+

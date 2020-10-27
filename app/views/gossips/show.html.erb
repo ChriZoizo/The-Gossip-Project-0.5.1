@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<!-- header -->
+<head>
+  <meta charset="utf-8">
+  <title><%= "The Gossip Project" %></title>
+  <script src="script.js"></script>
+</head>
+<body>
+   <% if flash[:notice_good] %>
+<div class="alert alert-success" role="alert">
+  A simple success alert—check it out!
+</div>
+ <% end %>
+<!-- Card -->
+<div class="card card-cascade wider reverse">
+
+  <!-- Card image -->
+  <div class="view view-cascade overlay">
+    <img class="card-img-top" src="https://www.avenir-sante.com/wp-content/uploads/2018/11/gossip-time-nico.png"
+      alt="Card image cap">
+    <a href="#!">
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h2 class="card-title"><strong><%= @gossipfind.title%></strong></h2>
+    <!-- Subtitle -->
+    <h4 class="font-weight-bold py-2"> By <%= @gossipfind.user[:first_name]%></h4>
+    <!-- Text -->
+    <p class="card-text"><%= @gossipfind.content%>
+    </p>
+    <p>ecris le <%= @gossipfind.create_date.strftime("%d/%m/%Y")%></p>
+    <%= link_to "Accéder au pofil de #{@gossipfind.user[:first_name]}", user_path(@user.id), :class =>"btn btn-secondary btn-lg active" %>
+  </div>
+
+</div>
+<!-- Card -->
+
+
+</body>
+</html>
+
+
+
+

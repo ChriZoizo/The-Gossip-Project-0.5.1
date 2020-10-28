@@ -40,5 +40,10 @@ end
 #Creation PMUSER (table de relation entre PM et USER)
 60.times do
  PmUser.create!(recipient_id: User.ids.sample, private_message_id: User.ids.sample)
+end
 
+
+60.times do
+  n = rand(2..20) 
+Comment.create!(content: Faker::Lorem.sentence(word_count: n), user_id: User.ids.sample, gossip_id: Gossip.ids.sample)
 end

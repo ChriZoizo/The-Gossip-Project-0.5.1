@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 
   resources :city
 
+  resources :comment 
+
 end

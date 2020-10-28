@@ -1,0 +1,25 @@
+<h1> Edit</h1>
+
+
+<% if flash[:notice_good] %>
+<div class="alert alert-success" role="alert">
+  A simple success alert—check it out!
+</div>
+ <% end %>
+
+
+ 
+<%= form_for @comment_edit do |f| %>
+    <div class="form_group">
+
+    <div class="form_group">
+        <label>Comentaire</label>
+        <%= f.text_area :content, class: 'form_control' %>
+    </div>
+
+    <div class="form_group">
+        <label>Titre</label>
+        <button typ='submit'>Modifier l'article</button>>
+    </div>
+<%= button_to "Supprimer", @comment_edit, :method => :delete, data: {confirm: "T'es sur ?"}, :class => 'btn btn-danger'%>
+    <% end %>

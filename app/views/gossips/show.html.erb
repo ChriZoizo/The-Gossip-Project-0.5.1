@@ -29,14 +29,27 @@
 
     <!-- TITLE -->
     <h2 class="card-title"><strong><%= @gossipfind.title%></strong></h2>
-    <!-- SUBTITLE -->
+    <!-- AUTEUR -->
     <h4 class="font-weight-bold py-2"> By <%= @gossipfind.user[:first_name]%> </h4> <p>From <%= link_to "#{@city[:name]}", city_path(@city[:id])  %> </p>
     <!-- TEXT -->
     <p class="card-text"><%= @gossipfind.content%>
     </p>
     <p>ecris le <%= @gossipfind.create_date.strftime("%d/%m/%Y")%></p>
     <%= link_to "Accéder au pofil de #{@gossipfind.user[:first_name]}", user_path(@gossipfind.user[:id]), :class => "btn btn-secondary btn-lg active" %>
-     
+     <!-- COMMENTAIRES -->
+     <% @comments.each do |com|%>
+<div class="row">
+<!-- creation mini carte gossip -->
+<div class="card text-left m-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= com.content%></h5>
+      <p class="card-text"><%= com.user[:first_name]%></p>
+      <%= link_to "Voir le commentaire", edit_comment_path(com.id), :class =>"btn btn-secondary btn-lg active" %>
+    </div>
+  </div>
+  </div>
+  <%end%>
+<%= link_to "Commenter", new_comment_path, :class =>"btn btn-info btn-lr active" %>
   </div>
    <!-- <%= link_to "Editer le Gossip", edit_gossip_path(@gossipfind.id), :class =>"btn btn-secondary btn-lr active" %>   -->     
 </div>
@@ -82,10 +95,30 @@
  <%= link_to "Signaler", edit_gossip_path(@gossipfind.id), :class =>"btn btn-secondary btn-lr active" %>
 <!-- <a href="<%= edit_gossip_path(@gossipfind.id)%>" class="btn">Voir l'article</a>                             edit_gossip_path(@gossipfind.id)-->
 
+<%= form_tag '/comment', method: "post" do %>
+<div id="container">
+<form>
+  <div class="row">
+    <div class="col">
+<div class="col">
+        <%= label_tag 'Contenu' %> <br />
+        <%= text_field_tag 'content', @comment.content, class: "form-control", placeholder: 'Commentaire', autocomplete: 'off'%>
+        <input name="gossip_id" type="hidden" value=" <%= @gossipfind.id %>">
+    </div>
+  </div>
 
+        <br /> 
+
+
+        <%= submit_tag "Confirmer", class: "btn btn-info" %>  
+        <%= link_to "Revenir à l'accueil", root_path, :class => 'btn btn-secondary'%>
+</div>
+      <% end %>
 
 </body>
 </html>
+
+
 
 
 

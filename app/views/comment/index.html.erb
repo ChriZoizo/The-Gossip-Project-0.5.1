@@ -1,0 +1,14 @@
+<% @comments.each do |com|%>
+
+<div class="row">
+<!-- creation mini carte gossip -->
+<div class="card text-left m-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= com.title%></h5>
+      <p class="card-text"><%= com.user[:first_name]%></p>
+      <p class="card-text"><small class="text-muted"><%= com.timestamps.strftime("%d/%m/%Y")%></small></p>
+      <%= link_to "Accéder au gossip", gossip_path(com.id), :class =>"btn btn-secondary btn-lg active" %>
+    </div>
+  </div>
+  </div>
+  <%end%>

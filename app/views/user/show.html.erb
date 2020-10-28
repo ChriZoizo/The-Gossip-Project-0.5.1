@@ -30,7 +30,6 @@
 <h6 class="font-weight-bold">Email: </h6> <p class="text-secondary"><%= @userfind.email%></p>
 <h6 class="font-weight-bold">Age: </h6> <p class="text-secondary"><%= @userfind.age%></p>
 <h6 class="font-weight-bold">Ville:</h6> <p class="text-secondary"><%=link_to @userfind.city[:name], city_path(@userfind.city[:id])%></p>
-    <!-- Quotation -->
     <p>
     </p>
     <%= link_to "Revenir à l'accueil", landing_path(:first_name_id), :class => 'btn btn-info'%>
@@ -38,5 +37,21 @@
 
 </div>
 <!-- Card -->
+
+
+
+  <% @gossips.each do |goss|%>
+<div class="row">
+<!-- creation mini carte gossip -->
+<div class="card text-left m-5" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= goss.title%></h5>
+      <p class="card-text"><%= goss.user[:first_name]%></p>
+      <p class="card-text"><small class="text-muted"><%= goss.create_date.strftime("%d/%m/%Y")%></small></p>
+      <%= link_to "Accéder au gossip", gossip_path(goss.id), :class =>"btn btn-secondary btn-lg active" %>
+    </div>
+  </div>
+  </div>
+      <% end %>
 </body>
 </html>

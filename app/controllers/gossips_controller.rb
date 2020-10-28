@@ -6,7 +6,8 @@ class GossipsController < ApplicationController
     @user = @gossipfind.user
     @city = @user.city
     @gossip_edit = Gossip.find(params[:id])
-
+    @comments = @gossipfind.comments
+    @comment = Comment.new
   end
   
   def index

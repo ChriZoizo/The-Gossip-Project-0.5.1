@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr">
-<!-- header -->
+<!-- HEADER -->
 <head>
   <meta charset="utf-8">
   <title><%= "The Gossip Project" %></title>
@@ -12,10 +12,10 @@
   A simple success alert—check it out!
 </div>
  <% end %>
-<!-- Card -->
+<!-- CARD -->
 <div class="card card-cascade wider reverse">
 
-  <!-- Card image -->
+  <!-- IMAGE -->
   <div class="view view-cascade overlay">
     <img class="card-img-top" src="https://www.avenir-sante.com/wp-content/uploads/2018/11/gossip-time-nico.png"
       alt="Card image cap">
@@ -24,22 +24,64 @@
     </a>
   </div>
 
-  <!-- Card content -->
+  <!-- CONTENT -->
   <div class="card-body card-body-cascade text-center">
 
-    <!-- Title -->
+    <!-- TITLE -->
     <h2 class="card-title"><strong><%= @gossipfind.title%></strong></h2>
-    <!-- Subtitle -->
-    <h4 class="font-weight-bold py-2"> By <%= @gossipfind.user[:first_name]%></h4>
-    <!-- Text -->
+    <!-- SUBTITLE -->
+    <h4 class="font-weight-bold py-2"> By <%= @gossipfind.user[:first_name]%> </h4> <p>From <%= link_to "#{@city[:name]}", city_path(@city[:id])  %> </p>
+    <!-- TEXT -->
     <p class="card-text"><%= @gossipfind.content%>
     </p>
     <p>ecris le <%= @gossipfind.create_date.strftime("%d/%m/%Y")%></p>
-    <%= link_to "Accéder au pofil de #{@gossipfind.user[:first_name]}", user_path(@user.id), :class =>"btn btn-secondary btn-lg active" %>
+    <%= link_to "Accéder au pofil de #{@gossipfind.user[:first_name]}", user_path(@gossipfind.user[:id]), :class => "btn btn-secondary btn-lg active" %>
+     
   </div>
-
+   <!-- <%= link_to "Editer le Gossip", edit_gossip_path(@gossipfind.id), :class =>"btn btn-secondary btn-lr active" %>   -->     
 </div>
-<!-- Card -->
+
+
+ <!-- MODAL -->
+   <%= form_for @gossipfind do |f| %>
+<button type="button" class="btn  btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="Titre">Editer</button>
+<br>
+ <!-- <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="Titre">Supprimer</button>-->    
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifie ton gossip</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            <div class="form_group">
+        <label>Titre</label>
+        <%= f.text_field :title, class: 'form_control' %>
+    </div>
+            <div class="form_group">
+        <label>Titre</label>
+        <%= f.text_area :content, class: 'form_control' %>
+    </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" <%=form_tag url_for(action: 'update'), method: "post" do %> Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <% end %>
+ <% end %>
+ <%= button_to "Supprimer", @gossip, :method => :delete, data: {confirm: "T'es sur ?"}, :class => 'btn btn-danger'%>   <!-- FAIRE LA CONFIRMATION -->
+ <%= link_to "Signaler", edit_gossip_path(@gossipfind.id), :class =>"btn btn-secondary btn-lr active" %>
+<!-- <a href="<%= edit_gossip_path(@gossipfind.id)%>" class="btn">Voir l'article</a>                             edit_gossip_path(@gossipfind.id)-->
+
 
 
 </body>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'city/show'
   get 'user/show'
   root 'home#index'
 
@@ -12,4 +13,7 @@ Rails.application.routes.draw do
   resources :gossips
 
   resources :user
+
+  resources :city
+
 end

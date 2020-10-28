@@ -1,0 +1,28 @@
+<h1> Edit</h1>
+
+
+<% if flash[:notice_good] %>
+<div class="alert alert-success" role="alert">
+  A simple success alert—check it out!
+</div>
+ <% end %>
+
+
+ 
+<%= form_for @gossip_edit do |f| %>
+    <div class="form_group">
+        <label>Titre</label>
+        <%= f.text_field :title, class: 'form_control' %>
+    </div>
+
+    <div class="form_group">
+        <label>Titre</label>
+        <%= f.text_area :content, class: 'form_control' %>
+    </div>
+
+    <div class="form_group">
+        <label>Titre</label>
+        <button typ='submit'>Modifier l'article</button>>
+    </div>
+
+    <% end %>

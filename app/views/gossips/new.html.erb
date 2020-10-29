@@ -36,8 +36,14 @@
         <%= text_field_tag 'content', @gossip.content, class: "form-control", placeholder: 'Votre potin', autocomplete: 'off'%>
     </div>
   </div>
-
+<label for="tags">Tag: </label>
+<select id="tags" name="taglist" form="tagform">
+<% @tags.each do |f| %>
+  <option value=<% f.title %>><%= f.title %></option>  <!-- A REVOIR LE VALUE -->
+  <% end %>
+</select>
         <br /> 
+         
 
 
         <%= submit_tag "Create Gossip", class: "btn btn-info" %>  <%= link_to "Revenir à l'accueil", root_path, :class => 'btn btn-secondary'%>

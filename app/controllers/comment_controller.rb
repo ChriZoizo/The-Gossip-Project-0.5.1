@@ -1,4 +1,6 @@
 class CommentController < ApplicationController
+  before_action :is_user?, only: [:edit, :udpate]
+
     def show
         id = params[:id]
         @commentfind = Comment.find(params[:id])
@@ -24,7 +26,7 @@ class CommentController < ApplicationController
       
         @comment = Comment.new('content': params[:content],
                                   'gossip_id': params[:gossip_id],
-                                  'user_id': 01)
+                                  'user_id': session[:user_id])
         if @comment.save
             redirect_back(fallback_location: root_path)    # IMPORTANT ! Permet de revenir a la page de base
         flash[:notice_good] = "comment Crée"
@@ -50,7 +52,7 @@ class CommentController < ApplicationController
         # @gossipid = Gossip.find(@comment[:gossip_id])
         # id = @gossipid.id
         @comment = Comment.find(params[:id])        # Méthode qui met à jour le potin à partir du contenu du formulaire de edit.html.erb, soumis par l'utilisateur
-        post_params = params.require(:comment).permit(:title, :content) 
+        post_params = params.require(:comment).permit(:content) 
         @comment.update(post_params) 
     
         

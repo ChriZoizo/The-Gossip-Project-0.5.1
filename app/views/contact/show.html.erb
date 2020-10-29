@@ -5,9 +5,54 @@
   <meta charset="utf-8">
   <title>Contact</title>
   <script src="script.js"></script>
+
 </head>
  <!-- Body -->
 <body>
+<link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="contact-background-image">
+		<div class="ui container margin-top-30">			
+			<form class="ui form pad-top-30 pad-bottom-30">
+			<h3 class="huge header inverted">Contact Us</h3>
+				<div class="two fields">
+					<div class="field">
+						<label>Prenom</label>
+						<input type="text" name="first-name" placeholder="First Name">
+					</div>
+					<div class="field">
+						<label>Nom</label>
+						<input type="text" name="last-name" placeholder="Last Name">
+					</div>
+				</div>
+        				</div>
+			  <div class="field">
+				  <label>:</label>
+				  <div class="ui selection dropdown">
+					  <input type="hidden" name="message-type">
+					  <i class="dropdown icon"></i>
+					  <div class="default text">Message Type</div>
+					  <div class="menu">
+						  <div class="item" data-value="1">Complaint</div>
+						  <div class="item" data-value="0">Query</div>
+					  </div>
+				  </div>
+				<div class="field">
+					<label>Votre message:</label>
+					<textarea></textarea>
+
+			  </div>
+			  <div class="field">
+				<label>Email</label>
+				<input type="email" placeholder="Email">
+			  </div>
+			  <div class="ui submit button">Submit</div>
+			</form>
+		</div>
+	</div>
 <!-- Info -->
 <h1> Chris</h1>
 <h3> Telephone : 0 836 65 65 65 </h3>
@@ -16,3 +61,4 @@
 <h1> Work In Progress </h1>
 </body>
 </html>
+

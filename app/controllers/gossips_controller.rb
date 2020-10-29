@@ -1,5 +1,7 @@
 class GossipsController < ApplicationController
-   
+  before_action :authenticate_user, only: [:index, :show, :create, :new]
+  before_action :is_user, only: [:edit, :update, :destroy]
+
   def show
     id = params[:id]
     @gossipfind = Gossip.find(params[:id])
@@ -8,8 +10,18 @@ class GossipsController < ApplicationController
     @gossip_edit = Gossip.find(params[:id])
     @comments = @gossipfind.comments
     @comment = Comment.new
-  end
+
+    @gossiptags = GossipTag.where(gossip_id: @gossipfind.id)
+    
+    @tags = Tag.where(tag_id: @gossiptags)
+   
+
+    
   
+  end
+
+
+
   def index
     @gossips = Gossip.all
   end
@@ -17,16 +29,16 @@ class GossipsController < ApplicationController
 
 
   def new
+    @tags = Tag.all
     @gossip = Gossip.new
     # Méthode qui crée un potin vide et l'envoie à une view qui affiche le formulaire pour 'le remplir' (new.html.erb)
   end
 
   def create
-    
     @gossip = Gossip.create('title' => params[:title],
                             'content' => params[:content],
                             'create_date' => '2017-09-23',
-                            'user_id' => 01)
+                            'user_id' => session[:user_id])
     if @gossip.save
     redirect_to gossip_path(@gossip.id)
     flash[:notice_good] = "Gossip Crée"
@@ -75,4 +87,26 @@ class GossipsController < ApplicationController
     # Méthode qui récupère le potin concerné et le détruit en base
     # Une fois la suppression faite, on redirige généralement vers la méthode index (pour afficher la liste à jour)
   end
+
+private
+
+
+
+
+def authenticate_user
+  unless current_user
+    flash[:danger] = "Please log in."
+    redirect_to new_session_path
+  end
+end
+
+def is_user
+  @gossip = Gossip.find(params[:id])
+unless current_user.id == @gossip.user_id
+  flash[:danger] = "Please log in."
+  redirect_to root_path
+end
+end
+
+
 end

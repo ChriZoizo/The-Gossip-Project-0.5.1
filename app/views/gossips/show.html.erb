@@ -29,17 +29,26 @@
 
     <!-- TITLE -->
     <h2 class="card-title"><strong><%= @gossipfind.title%></strong></h2>
+ 
     <!-- AUTEUR -->
     <h4 class="font-weight-bold py-2"> By <%= @gossipfind.user[:first_name]%> </h4> <p>From <%= link_to "#{@city[:name]}", city_path(@city[:id])  %> </p>
+
     <!-- TEXT -->
     <p class="card-text"><%= @gossipfind.content%>
     </p>
+
     <p>ecris le <%= @gossipfind.create_date.strftime("%d/%m/%Y")%></p>
+
+    
     <%= link_to "Accéder au pofil de #{@gossipfind.user[:first_name]}", user_path(@gossipfind.user[:id]), :class => "btn btn-secondary btn-lg active" %>
+  
+  
+
+
      <!-- COMMENTAIRES -->
      <% @comments.each do |com|%>
 <div class="row">
-<!-- creation mini carte gossip -->
+
 <div class="card text-left m-5" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><%= com.content%></h5>

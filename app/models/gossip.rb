@@ -3,6 +3,8 @@ class Gossip < ApplicationRecord
     belongs_to :user
     has_many :comments
 
+    has_many :like
+
     validates :title,
     presence: true,
     length: { in: 3..14 }

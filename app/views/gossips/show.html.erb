@@ -38,8 +38,17 @@
     </p>
 
     <p>ecris le <%= @gossipfind.create_date.strftime("%d/%m/%Y")%></p>
-
-    
+<p><%= @gossipfind.like.count %> <%= (@gossipfind.like.count) == 1 ? 'Like' : 'Likes'%></p>
+   <!--  <%= button_to 'Like', gossip_like_index_path(@gossipfind.id), method: :post %>
+    <%= button_to 'Unlike', gossip_like_path(@gossipfind), method: :delete %>-->
+<% if logged_in? == true %>
+    <% pre_like = @gossipfind.like.find { |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  <%= button_to 'Unlike', gossip_like_path(@gossipfind, pre_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', gossip_like_index_path(@gossipfind), method: :post %>
+<% end %>
+<% end %>
     <%= link_to "Accéder au pofil de #{@gossipfind.user[:first_name]}", user_path(@gossipfind.user[:id]), :class => "btn btn-secondary btn-lg active" %>
   
   
@@ -53,18 +62,23 @@
     <div class="card-body">
       <h5 class="card-title"><%= com.content%></h5>
       <p class="card-text"><%= com.user[:first_name]%></p>
+       <% if user_is? == true %>               <!-- !!!!!!!!!!!!!!!!!!!!!!!! A lié avec l'user_id du comment -->
       <%= link_to "Voir le commentaire", edit_comment_path(com.id), :class =>"btn btn-secondary btn-lg active" %>
+      <% end %>
     </div>
   </div>
   </div>
   <%end%>
+  
 <%= link_to "Commenter", new_comment_path, :class =>"btn btn-info btn-lr active" %>
+
   </div>
    <!-- <%= link_to "Editer le Gossip", edit_gossip_path(@gossipfind.id), :class =>"btn btn-secondary btn-lr active" %>   -->     
 </div>
 
 
  <!-- MODAL -->
+ <% if user_is? == true %>
    <%= form_for @gossipfind do |f| %>
 <button type="button" class="btn  btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="Titre">Editer</button>
 <br>
@@ -93,7 +107,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" <%=form_tag url_for(action: 'update'), method: "post" do %> Sauvegarder</button>
+        <button type="submit" class="btn btn-primary" <%=form_tag url_for(action: 'update'), method: "post" do %>> Sauvegarder</button>
       </div>
     </div>
   </div>
@@ -101,6 +115,7 @@
  <% end %>
  <% end %>
  <%= button_to "Supprimer", @gossip, :method => :delete, data: {confirm: "T'es sur ?"}, :class => 'btn btn-danger'%>   <!-- FAIRE LA CONFIRMATION -->
+<% end %>
  <%= link_to "Signaler", edit_gossip_path(@gossipfind.id), :class =>"btn btn-secondary btn-lr active" %>
 <!-- <a href="<%= edit_gossip_path(@gossipfind.id)%>" class="btn">Voir l'article</a>                             edit_gossip_path(@gossipfind.id)-->
 

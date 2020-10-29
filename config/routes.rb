@@ -10,8 +10,9 @@ Rails.application.routes.draw do
 
   get '/welcome/:first_name', to: 'welcome#say_hello', as: 'landing'
 
-  resources :gossips
-
+  resources :gossips do
+    resources :like, only: [:new, :create, :destroy]
+  end
   resources :user
 
   resources :city
@@ -19,5 +20,7 @@ Rails.application.routes.draw do
   resources :comment 
 
   resources :sessions, only: [:new, :create, :destroy]
+
+  #resources :like, only: [:new, :create, :destroy]
 
 end

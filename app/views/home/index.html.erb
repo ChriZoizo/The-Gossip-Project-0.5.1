@@ -35,6 +35,15 @@
       <p class="card-text"><small class="text-muted"><%= goss.create_date.strftime("%d/%m/%Y")%></small></p>
       <%= link_to "Accéder au gossip", gossip_path(goss.id), :class =>"btn btn-secondary btn-lg active" %>
       <p class="card-text"> <%= goss.comment_ids.count%> commentaires</p>
+      <% if logged_in? == true %>
+          <% pre_like = goss.like.find { |like| like.user_id == current_user.id} %>
+        <% if pre_like %>
+         <%= button_to 'Unlike', gossip_like_path(goss, pre_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', gossip_like_index_path(goss), method: :post %>
+<% end %>
+<% end %>
+      <p><%= goss.like.count %> <%= (goss.like.count) == 1 ? 'Like' : 'Likes'%></p>
     
     </div>
   </div>

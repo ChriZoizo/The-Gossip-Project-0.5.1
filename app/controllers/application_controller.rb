@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 include SessionsHelper
+include GossipsHelper
 helper_method :current_user
 helper_method :logged_in?
 
@@ -10,7 +11,6 @@ end
 def logged_in?
     !current_user.nil?  
 end
-
 
 
 end

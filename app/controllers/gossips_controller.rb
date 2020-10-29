@@ -14,11 +14,7 @@ class GossipsController < ApplicationController
     @gossiptags = GossipTag.where(gossip_id: @gossipfind.id)
     
     @tags = Tag.where(tag_id: @gossiptags)
-   
-
-    
-  
-  end
+   end
 
 
 
